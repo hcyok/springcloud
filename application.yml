@@ -1,0 +1,33 @@
+server:
+  port: 8222
+spring:
+  application:
+    name: myshop-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: myshop-user-route
+          uri: lb://myshop-user
+          predicates:
+            - Path=/myshop-user/**，/myshop-user/v3/api-docs
+        - id: myshop-web-route
+          uri: lb://myshop-web
+        #  filters:
+         #   - MyErrorFilter
+          #  - MyFilter1
+          #  - MyFilter2
+          predicates:
+            - Path=/web/order**  # ??? /web/order ?????
+    openapi:
+      paths-to-match: /myshop-user/v3/api-docs, /myshop-web/v3/api-docs
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8888/eureka
+  instance:
+    prefer-ip-address: true
+
+
