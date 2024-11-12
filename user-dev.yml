@@ -1,0 +1,32 @@
+server:
+  port: 9101
+
+spring:
+  application:
+    name: myshop-user
+
+  datasource:
+    url: jdbc:mysql://192.168.130.128:3306/springcloud?characterEncoding=UTF8&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /webjars/swagger-ui/index.html
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8888/eureka
+  instance:
+    prefer-ip-address: true
